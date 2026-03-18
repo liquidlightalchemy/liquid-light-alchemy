@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liquid Light Alchemy | Conscious Breathwork</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #0a1f2e;
+      --ocean:   #0e3d5c;
+      --teal:    #1a7a8a;
+      --aqua:    #4db6c0;
+      --mist:    #a8dde3;
+      --foam:    #e8f6f8;
+      --white:   #f5fbfc;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: linear-gradient(to bottom, rgba(10,31,46,0.92), transparent);
+      backdrop-filter: blur(4px);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.12em;
+      color: var(--mist);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--mist);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(26,122,138,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(14,61,92,0.5) 0%, transparent 60%),
+        /* ↓ SWAP THIS URL with your Cloudinary hero image */
+        var(--hero-bg, linear-gradient(180deg, #0a1f2e 0%, #0d2e44 60%, #0e3d5c 100%));
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Animated water rings */
+    .water-rings {
+      position: absolute; bottom: -10%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 400px; pointer-events: none;
+    }
+    .ring {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(77,182,192,0.18);
+      animation: ripple 8s ease-out infinite;
+    }
+    .ring:nth-child(1) { width: 300px; height: 80px; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 500px; height: 130px; animation-delay: 1.5s; }
+    .ring:nth-child(3) { width: 700px; height: 180px; animation-delay: 3s; }
+    .ring:nth-child(4) { width: 900px; height: 230px; animation-delay: 4.5s; }
+    @keyframes ripple {
+      0%   { opacity: 0.6; transform: translateX(-50%) scaleY(1); }
+      100% { opacity: 0;   transform: translateX(-50%) scaleY(1.4); }
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 1.8rem;
+      animation: fadeUp 1s ease both;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      max-width: 800px;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--aqua);
+    }
+    .hero-sub {
+      margin-top: 1.8rem;
+      max-width: 520px;
+      font-size: 1.05rem;
+      color: var(--mist);
+      opacity: 0.85;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+    .hero-cta {
+      margin-top: 3rem;
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1px solid var(--aqua);
+      color: var(--aqua);
+      text-decoration: none;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.35s, color 0.35s;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+    .hero-cta:hover { background: var(--aqua); color: var(--deep); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 2rem; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+    .container-wide { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .section-title em { font-style: italic; color: var(--mist); }
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--mist);
+      opacity: 0.9;
+      max-width: 680px;
+    }
+    .section-body p + p { margin-top: 1.2rem; }
+
+    /* ── WHAT IS BREATHWORK ── */
+    #what {
+      background: linear-gradient(160deg, #0d2e44 0%, #0a1f2e 100%);
+      border-top: 1px solid rgba(77,182,192,0.1);
+      border-bottom: 1px solid rgba(77,182,192,0.1);
+    }
+    #what .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .what-visual {
+      position: relative;
+      height: 380px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .breath-circle {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,182,192,0.2) 0%, rgba(26,122,138,0.08) 60%, transparent 100%);
+      border: 1px solid rgba(77,182,192,0.25);
+      display: flex; align-items: center; justify-content: center;
+      animation: breathe 6s ease-in-out infinite;
+    }
+    .breath-circle-inner {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,182,192,0.3) 0%, transparent 80%);
+      border: 1px solid rgba(77,182,192,0.4);
+      animation: breathe 6s ease-in-out infinite reverse;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50%       { transform: scale(1.18); opacity: 1; }
+    }
+    .orbit {
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      border: 1px dashed rgba(77,182,192,0.12);
+      animation: spin 30s linear infinite;
+    }
+    .orbit-dot {
+      position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--aqua);
+      opacity: 0.6;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── PILLARS ── */
+    #pillars {
+      background: #0a1f2e;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+    .pillar {
+      padding: 3rem 2.4rem;
+      background: rgba(14,61,92,0.35);
+      border: 1px solid rgba(77,182,192,0.08);
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .pillar:hover {
+      background: rgba(26,122,138,0.18);
+      border-color: rgba(77,182,192,0.25);
+    }
+    .pillar-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .pillar-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .pillar-text { font-size: 0.95rem; color: var(--mist); opacity: 0.85; }
+
+    /* ── EMOTIONS ── */
+    #emotions {
+      background: linear-gradient(180deg, #0a1f2e 0%, #0c2a40 100%);
+      border-top: 1px solid rgba(77,182,192,0.1);
+    }
+    #emotions .inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .quote-block {
+      padding: 3rem;
+      border-left: 2px solid var(--teal);
+      background: rgba(26,122,138,0.08);
+      border-radius: 0 4px 4px 0;
+    }
+    .quote-text {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--mist);
+      line-height: 1.5;
+    }
+    .quote-attr {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      opacity: 0.7;
+    }
+
+    /* ── WARM WATER REBIRTHING ── */
+    #rebirthing {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 50%, rgba(26,122,138,0.22) 0%, transparent 70%),
+        #0a1f2e;
+      border-top: 1px solid rgba(77,182,192,0.1);
+    }
+    #rebirthing .section-body { margin: 0 auto; text-align: left; }
+    .coming-soon-badge {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid rgba(77,182,192,0.35);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      opacity: 0.75;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: linear-gradient(180deg, #0a1f2e 0%, #0d2e44 100%);
+      border-top: 1px solid rgba(77,182,192,0.1);
+    }
+    #contact .inner {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start;
+    }
+    .contact-intro .section-body { max-width: 100%; }
+
+    form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      opacity: 0.8;
+    }
+    input, textarea, select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(77,182,192,0.2);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--aqua);
+      background: rgba(77,182,192,0.07);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(168,221,227,0.35); }
+    textarea { resize: vertical; min-height: 130px; }
+    select option { background: var(--ocean); }
+
+    .submit-btn {
+      margin-top: 0.5rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 1px solid var(--aqua);
+      color: var(--aqua);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.35s, color 0.35s;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+    .submit-btn:hover { background: var(--aqua); color: var(--deep); }
+
+    .success-msg {
+      display: none;
+      padding: 1rem 1.4rem;
+      background: rgba(77,182,192,0.12);
+      border: 1px solid rgba(77,182,192,0.3);
+      border-radius: 2px;
+      color: var(--mist);
+      font-size: 0.95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(77,182,192,0.1);
+      background: var(--deep);
+    }
+    .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--mist); letter-spacing: 0.1em; }
+    .footer-note { font-size: 0.78rem; color: var(--mist); opacity: 0.4; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      #what .container,
+      #emotions .inner,
+      #contact .inner { grid-template-columns: 1fr; gap: 3rem; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .what-visual { height: 250px; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- IMAGE SWAP GUIDE (replace comment lines with your Cloudinary URLs):
+
+    HERO BACKGROUND — in the CSS :root block, add:
+      --hero-bg: url('https://res.cloudinary.com/YOUR/image/upload/hero.jpg');
+    Then in #hero background, replace var(--hero-bg, ...) fallback with the URL.
+
+    SECTION IMAGES — search for "<!-- IMG:" comments below to find insertion points.
+    -->
+  <nav>
+    <a href="#hero" class="nav-logo">Liquid Light Alchemy</a>
+    <ul class="nav-links">
+      <li><a href="#what">What It Is</a></li>
+      <li><a href="#pillars">Benefits</a></li>
+      <li><a href="#emotions">Emotions</a></li>
+      <li><a href="#rebirthing">Rebirthing</a></li>
+      <li><a href="#contact">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="water-rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+    <p class="hero-tag">Conscious Connected Breathwork</p>
+    <h1 class="hero-title">Breathe into your<br><em>own power</em></h1>
+    <p class="hero-sub">Your breath is the most profound tool you carry. Learn to use it — and reclaim the freedom that lives beneath every emotion.</p>
+    <a href="#contact" class="hero-cta">Begin Your Journey</a>
+  </section>
+
+  <!-- WHAT IS BREATHWORK -->
+  <section id="what">
+    <div class="container">
+      <div class="what-visual">
+        <div class="orbit"><div class="orbit-dot"></div></div>
+        <div class="breath-circle">
+          <div class="breath-circle-inner"></div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">The Practice</p>
+        <h2 class="section-title">What is<br><em>Breathwork?</em></h2>
+        <div class="section-body">
+          <p>Breathwork is the conscious, intentional use of the breath to access deeper states of awareness, release stored tension, and activate your body's innate capacity to heal.</p>
+          <p>Unlike meditation, breathwork is active — it moves energy through your system, clears what no longer serves you, and opens space for clarity, calm, and wholeness.</p>
+          <p>Rooted in ancient wisdom and supported by modern science, it is one of the most direct pathways to emotional freedom available to us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS / BENEFITS -->
+  <section id="pillars">
+    <div class="container-wide">
+      <p class="section-label" style="text-align:center;">Why Breathwork</p>
+      <h2 class="section-title" style="text-align:center; max-width:600px; margin: 0 auto 1rem;">The power held in<br><em>a single breath</em></h2>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <span class="pillar-icon">🌊</span>
+          <div class="pillar-title">Emotional Release</div>
+          <p class="pillar-text">The body holds what the mind cannot process. Breathwork creates a safe passage for long-held emotions to surface, be felt, and dissolve — often without words.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">⚡</span>
+          <div class="pillar-title">Nervous System Reset</div>
+          <p class="pillar-text">Conscious breathing directly regulates your autonomic nervous system — shifting you from chronic stress and survival states into deep presence and ease.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🌀</span>
+          <div class="pillar-title">Expanded Awareness</div>
+          <p class="pillar-text">Many practitioners report profound states of clarity, insight, and connection — a natural arising that comes when the analytical mind steps aside and something deeper emerges.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">💧</span>
+          <div class="pillar-title">Trauma Processing</div>
+          <p class="pillar-text">Trauma lives in the body, not just the story. Breathwork offers a somatic pathway to gently unwind trauma without requiring you to relive or re-narrate it.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">✨</span>
+          <div class="pillar-title">Personal Empowerment</div>
+          <p class="pillar-text">When you can stay with the fullness of your own experience — breath by breath — you discover a resilience and inner authority that no external circumstance can take away.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🫁</span>
+          <div class="pillar-title">Physical Vitality</div>
+          <p class="pillar-text">Increased oxygen, improved circulation, reduced cortisol, better sleep. The physiological effects of intentional breathing are well-documented and deeply felt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMOTIONS -->
+  <section id="emotions">
+    <div class="container">
+      <div class="inner">
+        <div>
+          <p class="section-label">Emotional Intelligence</p>
+          <h2 class="section-title">Breath as a bridge<br>through <em>emotion</em></h2>
+          <div class="section-body">
+            <p>Every emotion is, at its root, a movement of energy seeking expression. When we suppress, bypass, or intellectualize our feelings, they don't disappear — they settle into the body as tension, numbness, or reactivity.</p>
+            <p>Breathwork invites us to do something radical: stay. To breathe into the sensation rather than away from it. In doing so, emotions are allowed to complete their natural arc — and the energy they carry transforms into aliveness.</p>
+            <p>This is not about manufacturing feeling. It's about creating enough safety within yourself that what is already present can finally move through.</p>
+          </div>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text">"Between stimulus and response, there is a space. In that space lies our freedom. The breath is the doorway to that space."</p>
+          <p class="quote-attr">— Adapted from Viktor Frankl</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REBIRTHING -->
+  <section id="rebirthing">
+    <div class="container">
+      <p class="section-label">Coming Soon</p>
+      <h2 class="section-title">Warm Water<br><em>Rebirthing</em></h2>
+      <div class="section-body">
+        <p>Water is the element we came from. Warm water rebirthing combines conscious connected breathwork with the profound support of being held in warm water — recreating the safety and openness of our earliest state of being.</p>
+        <p>This deeply therapeutic modality allows the body to release at a cellular level, and many participants describe it as one of the most transformative experiences of their lives. We are bringing this practice forward soon.</p>
+      </div>
+      <span class="coming-soon-badge">Launching Soon — Join the Waitlist Below</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container-wide">
+      <div class="inner">
+        <div class="contact-intro">
+          <p class="section-label">Connect</p>
+          <h2 class="section-title">Ready to<br><em>begin?</em></h2>
+          <div class="section-body">
+            <p>Whether you're curious about breathwork for the first time, or ready to book your first session, reach out — I'd love to hear from you.</p>
+            <p>I'll respond within 48 hours to answer your questions and explore whether we're a good fit to work together.</p>
+          </div>
+        </div>
+        <div>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="How should I call you?" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="interest">I'm Interested In</label>
+              <select id="interest" name="interest">
+                <option value="">Select one…</option>
+                <option value="intro">A free intro call</option>
+                <option value="individual">Individual breathwork session</option>
+                <option value="group">Group breathwork session</option>
+                <option value="rebirthing">Warm water rebirthing waitlist</option>
+                <option value="general">General information</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" placeholder="Tell me a little about where you are and what you're looking for…"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+            <div class="success-msg" id="successMsg">
+              Thank you for reaching out. I'll be in touch within 48 hours. ✦
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Liquid Light Alchemy</span>
+    <span class="footer-note">© 2026 Liquid Light Alchemy · All rights reserved</span>
+  </footer>
+
+  <script>
+    // Simple form UX (replace with Netlify form or Formspree action for real submissions)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn');
+      const msg = document.getElementById('successMsg');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      setTimeout(() => {
+        e.target.reset();
+        btn.style.display = 'none';
+        msg.style.display = 'block';
+      }, 1000);
+    }
+
+    // Subtle scroll-based nav opacity
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(10,31,46,0.97)'
+        : 'linear-gradient(to bottom, rgba(10,31,46,0.92), transparent)';
+    });
+  </script>
+</body>
+</html>
